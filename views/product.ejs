@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= product.type %> - Product Details</title>
+    <link rel="stylesheet" href="/Pstyle.css">
+    <link rel="icon" href="/logo.png">
+</head>
+<body>
+    <div class="product-container">
+        <div class="product-image">
+            <img src="<%= product.image %>" alt="Product Image">
+        </div>
+        <div class="product-details">
+            <h1><%= product.type %></h1>
+            <p><strong>Price:</strong> <%= product.price %></p>
+            <p><strong>Category:</strong> <%= product.category %></p>
+            <p><strong>Small Description:</strong> <%= product.Smalldescription %></p>
+            <p><strong>Large Description:</strong> <%= product.Largedescription %></p>
+
+            <h2>Seller Information</h2>
+            <p><strong>Company Name:</strong> <%= product.owner.companyName %></p>
+            <p><strong>Seller Name:</strong> <%= product.owner.username %></p>
+            <p><strong>Mobile:</strong> <%= product.owner.Pnumber %></p>
+            <p><strong>Email:</strong> <%= product.owner.email %></p>
+            <p><strong>District:</strong> <%= product.owner.district %></p>
+
+            <% if (sellerId && product.owner._id.toString() === sellerId.toString()) { %>
+                <div class="buttons">
+                    <a href="/product/edit/<%= product._id %>" class="button edit">Edit</a>
+                    <form action="/product/delete/<%= product._id %>" method="POST" style="display:inline;">
+                        <button type="submit" class="button delete">Delete</button>
+                    </form>
+                </div>
+            <% } else { %>
+                <div class="button-container">
+                    <a href="mailto:<%= product.owner.email %>" class="button mail">Mail</a>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>
