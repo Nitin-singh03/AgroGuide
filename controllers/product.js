@@ -1,5 +1,7 @@
 
 const Product = require('../model/product');
+const ReviewProduct = require('../model/productReview.js');
+const User = require("../model/user.js");
 
 exports.createProduct = async (req, res) => {
     try {
@@ -104,15 +106,56 @@ exports.deleteProduct = async (req, res) => {
     }
 };
 
-exports.viewProduct = async (req, res) => {
+exports.viewProduct = async (req, res) => { 
     try {
+        // Fetch product details
         const product = await Product.findById(req.params.id).populate('owner').exec();
         if (!product) return res.status(404).send('Product not found');
 
-        res.render('product', { product });
+        // Fetch reviews for this product
+        const reviews = await ReviewProduct.find({ product: product._id })
+            .populate('user', 'username')
+            .exec();
+
+        res.render('product', { product, reviews });
     } catch (error) {
         console.error(error);
-        req.flash("error", "some error occurred");
+        req.flash("error", "Some error occurred");
         res.redirect('/');
+    }
+};
+
+exports.addReview = async (req, res) => {
+    try {
+        
+        if (!req.user) {
+            req.flash('error', 'Unauthorized. Please log in to submit a review.');
+            return res.redirect('/login');
+        }
+
+        const { rating, comment } = req.body;
+        const productId = req.params.productId;
+
+        // Validate rating input
+        if (!rating || rating < 0 || rating > 5) {
+            req.flash('error', 'Rating must be between 0 and 5.');
+            return res.redirect('back');
+        }
+
+        // Create a new review
+        const newReview = new ReviewProduct({
+            product: productId,
+            user: req.user._id,
+            rating,
+            comment,
+        });
+
+        await newReview.save();
+        req.flash('success', 'Review added!');
+        res.redirect(`/product/${productId}`);
+    } catch (error) {
+        console.error(error);
+        req.flash('error', 'Server error. Please try again later.');
+        res.redirect('back');
     }
 };

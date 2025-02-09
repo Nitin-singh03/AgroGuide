@@ -141,38 +141,45 @@
         });
 
         form.addEventListener("submit", (event) => {
-            event.preventDefault();
-            const filteredData = fullData.filter(record =>
-                record.state === stateSelect.value &&
-                record.district === districtSelect.value &&
-                record.commodity === commoditySelect.value &&
-                record.market === marketSelect.value &&
-                record.variety === varietySelect.value
-            );
+                event.preventDefault();
+                const filteredData = fullData.filter(record =>
+                    record.state === stateSelect.value &&
+                    record.district === districtSelect.value &&
+                    record.commodity === commoditySelect.value &&
+                    record.market === marketSelect.value &&
+                    record.variety === varietySelect.value
+                );
 
-            output.innerHTML = "";
-            if (filteredData.length > 0) {
-                filteredData.forEach(record => {
-                    const card = document.createElement("div");
-                    card.className = "card";
-                    card.innerHTML = `
-                        <h3>${record.commodity}</h3>
-                        <p><strong>State:</strong> ${record.state}</p>
-                        <p><strong>District:</strong> ${record.district}</p>
-                        <p><strong>Market:</strong> ${record.market}</p>
-                        <p><strong>Variety:</strong> ${record.variety}</p>
-                        <p><strong>Price:</strong> ${record.modal_price} INR</p>
-                        <p><strong>Grade:</strong> ${record.grade}</p>
-                        <p><strong>Arrival date:</strong> ${record.arrival_date}</p>
-                        <p><strong>Minimum Price:</strong> ${record.min_price}</p>
-                        <p><strong>Maximum Price:</strong> ${record.max_price}</p>
-                    `;
-                    output.appendChild(card);
-                });
-            } else {
-                output.innerHTML = "<p>No prices found for the selected filters.</p>";
-            }
-        });
+                output.innerHTML = ""; // Clear previous results
+
+                if (filteredData.length > 0) {
+                    filteredData.forEach(record => {
+                        const card = document.createElement("div");
+                        card.className = "card p-3 mb-3";
+
+                        card.innerHTML = `
+                <h3>${record.commodity}</h3>
+                    <p><strong>Min Price:</strong> <h1>${record.min_price} INR</h1></p>
+                    <p><strong>Max Price:</strong> <h1>${record.max_price} INR</h1></p>
+                <p><strong>State:</strong> ${record.state}</p>
+                <p><strong>District:</strong> ${record.district}</p>
+                <p><strong>Market:</strong> ${record.market}</p>
+                <p><strong>Variety:</strong> ${record.variety}</p>
+                <p><strong>Price:</strong> ${record.modal_price} INR</p>
+                <p><strong>Grade:</strong> ${record.grade}</p>
+                <p><strong>Arrival Date:</strong> ${record.arrival_date}</p>
+            `;
+
+                        output.appendChild(card);
+                    });
+
+                    // Scroll to the output div
+                    output.scrollIntoView({ behavior: "smooth" });
+                } else {
+                    output.innerHTML = "<p>No prices found for the selected filters.</p>";
+                }
+            });
+
 
         populateStates();
     </script>

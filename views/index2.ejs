@@ -22,7 +22,6 @@
             <span class="navlink">Overview</span>
             <i class="bx bx-chevron-right arrow-left"></i>
           </div>
-          <!-- Category links in the sidebar -->
           <ul class="menu_items submenu">
             <% let uniqueCategories = [...new Set(products.map(p => p.category))]; %>
             <% uniqueCategories.forEach(category => { %>
@@ -100,7 +99,6 @@
         </ul>
       <% } %>
 
-      <!-- Sidebar Open / Close -->
       <div class="bottom_content">
         <div class="bottom expand_sidebar">
           <span> Expand</span>

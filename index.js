@@ -24,7 +24,6 @@ const productRouter = require("./routes/product.js");
 const sellerRouter = require("./routes/seller.js");
 const userRouter = require("./routes/user.js");
 
-
 const sessionOptions = {
     secret: process.env.SECRET || 'your-secret-key',
     resave: false,
@@ -38,7 +37,6 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 app.use(flash());
 
-// Passport Configuration
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -70,14 +68,12 @@ mongoose.connect(dbUrl)
     .then(() => console.log("Connected to DB"))
     .catch(err => console.log("DB connection error:", err));
 
-
 app.use('/', userRouter);
 app.use('/seller', sellerRouter);
 app.use('/product', productRouter);
 app.use('/contractor', contractorRouter);
 app.use('/contract', contractRouter);
 app.use('/admin', adminRouter);
-
 
 app.get("/predict", (req, res) => {
     res.render("analyzer.ejs")

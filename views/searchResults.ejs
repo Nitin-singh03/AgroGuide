@@ -64,7 +64,7 @@
           </div> -->
           <div class="navbar-nav ms-auto">
             <form action="/search" method="get" class="d-flex" role="search">
-              <input class="form-control me-2 search-inp" type="search" name="query" placeholder="Search" aria-label="Search">
+              <input class="form-control me-2 search-inp" type="search" name="query" placeholder="Search" aria-label="Search" value="<%= query %>">
               <button class="btn search-btn" type="submit">
                   <i class="fa-solid fa-magnifying-glass"></i>Search
               </button>
@@ -213,6 +213,9 @@
                     </ul>
                   </span>
                   <p>Price: &#x20b9 <%= product.price %></p>
+                  <div>
+                    <p>Rating</p>
+                  </div>
                 </div>
               </a>
             <% }); %>
@@ -223,7 +226,6 @@
       </nav>
     </div>
 
-    <!-- JavaScript -->
     <script>
       const sidebar = document.querySelector(".sidebar");
       const sidebarOpen = document.querySelector("#sidebarOpen");

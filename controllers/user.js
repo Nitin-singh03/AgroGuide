@@ -4,6 +4,8 @@ const Product = require('../model/product');
 const Contract = require("../model/contract");
 const Contractor =require('../model/contractor');
 
+const ContractorReview = require('../model/contractorReview.js');
+
 exports.signup = async (req, res) => {
     const { Pnumber, username, email, password } = req.body;
     console.log(Pnumber);
@@ -112,7 +114,6 @@ exports.searchProducts = async (req, res) => {
         };
     }
 
-    console.log('Filter:', filter);
 
     try {
         let products = await Product.find(filter).populate('owner');
@@ -132,10 +133,9 @@ exports.searchProducts = async (req, res) => {
 exports.searchContractor = async (req, res) => {
     const { query, sort } = req.query;
     let contractorIds = [];
-    console.log('Incoming Query:', query);
 
     try {
-        if (query) {
+        if (query && query.trim() !== '') {
             const contractors = await Contractor.find({
                 $or: [
                     { username: { $regex: query, $options: 'i' } },
@@ -146,26 +146,21 @@ exports.searchContractor = async (req, res) => {
             contractorIds = contractors.map(contractor => contractor._id);
         }
 
-        let filter = {};
-        if (contractorIds.length > 0) {
-            filter = { owner: { $in: contractorIds } }; 
-        }
-
-        console.log('Filter:', JSON.stringify(filter));
+        let filter = contractorIds.length > 0 ? { owner: { $in: contractorIds } } : {};
 
         let contracts;
-
-        if (sort === 'low-high') {
-            contracts = await Contract.find(filter).populate('owner').sort({ area: 1 });
-        } else if (sort === 'high-low') {
-            contracts = await Contract.find(filter).populate('owner').sort({ area: -1 });
-        } else {
-            contracts = await Contract.find(filter).populate('owner');
+        let sortOption = {};
+        if (sort) {
+            const lowerSort = sort.toLowerCase();
+            if (lowerSort === 'low-high') sortOption.area = 1;
+            else if (lowerSort === 'high-low') sortOption.area = -1;
         }
 
-        console.log('Contracts Found:', contracts.length);
+        contracts = await Contract.find(filter).populate('owner').sort(sortOption);
 
+        console.log('Contracts Found:', contracts.length);
         res.render('contractor_search', { contracts, query, sort });
+
     } catch (error) {
         console.error('Error fetching contracts:', error);
         res.status(500).send('Server Error');
@@ -175,3 +170,4 @@ exports.searchContractor = async (req, res) => {
 exports.commodity_price = async(req, res) => {
     res.render('CommodityPrice.ejs');
 };
+
