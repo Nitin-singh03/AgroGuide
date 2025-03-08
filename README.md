@@ -234,7 +234,7 @@ AgroGuide/
 1. **Clone the Repository:**
 
    ```bash
-   git clone [https://github.com/Nitin-singh03/AgroGuide.git]
+   git clone https://github.com/Nitin-singh03/AgroGuide.git
    cd AgroGuide
 
 ### Install Dependencies:
