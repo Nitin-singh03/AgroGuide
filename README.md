@@ -256,25 +256,25 @@ bash
 Copy
 Edit
 
-# MongoDB connection string
+### MongoDB connection string
 
 MONGO_URI=mongodb+srv://<username>:<password>@cluster0.r9vmv.mongodb.net/<your_db_name>?retryWrites=true&w=majority
 
-# Application secret
+### Application secret
 
 SECRET="your_application_secret"
 
-# Application port
+### Application port
 
 PORT=8080
 
-# Cloudinary configuration (or other cloud service)
+### Cloudinary configuration (or other cloud service)
 
 CLOUD_NAME=your_cloud_name
 CLOUD_API_KEY=your_cloud_api_key
 CLOUD_API_SECRET=your_cloud_api_secret
 
-# API keys
+### API keys
 
 PRICE_API_KEY=your_price_api_key
 WEATHER_API_KEY=your_weather_api_key
