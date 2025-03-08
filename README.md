@@ -133,66 +133,67 @@ The project follows a modular MVC architecture. Here’s an overview of the stru
 
 AgroGuide/
 ├── controllers/                # Contains business logic for handling requests. <br>
-│   ├── admin.js              # Controller for admin-related routes.
-│   ├── contract.js           # Controller for managing contracts.
-│   ├── contractor.js         # Controller for contractor-related routes.
-│   ├── product.js            # Controller for product listings.
-│   ├── seller.js             # Controller for seller-related routes.
-│   └── user.js               # Controller for user-related actions.
+│   ├── admin.js              # Controller for admin-related routes.<br>
+│   ├── contract.js           # Controller for managing contracts.<br>
+│   ├── contractor.js         # Controller for contractor-related routes.<br>
+│   ├── product.js            # Controller for product listings.<br>
+│   ├── seller.js             # Controller for seller-related routes.<br>
+│   └── user.js               # Controller for user-related actions.<br>
+│  <br>
+├── model/                    # Contains Mongoose schemas and models.<br>
+│   ├── admin.js              # Schema/model for admin.<br>
+│   ├── application.js        # Schema/model for applications.<br>
+│   ├── contract.js           # Schema/model for contracts.<br>
+│   ├── contractor.js         # Schema/model for contractors.<br>
+│   ├── contractorReview.js   # Schema/model for contractor reviews.<br>
+│   ├── product.js            # Schema/model for products.<br>
+│   ├── productReview.js      # Schema/model for product reviews.<br>
+│   ├── seller.js             # Schema/model for sellers.<br>
+│   ├── user.js               # Schema/model for users.<br>
+│   └── workStatus.js         # Schema/model for work status tracking.<br>
+│<br>
+├── node_modules/             # NPM packages (auto-generated).<br>
+│<br>
+├── public/                   # Static assets (CSS, client-side JS, images, etc.).<br>
+│   └── ...                   # Further organized as needed.<br>
+│<br>
+├── routes/                   # Express routes mapping URLs to controllers.<br>
+│   ├── admin.js              # Routes for admin actions.<br>
+│   ├── contract.js           # Routes for contract actions.<br>
+│   ├── contractor.js         # Routes for contractor actions.<br>
+│   ├── product.js            # Routes for product actions.<br>
+│   ├── seller.js             # Routes for seller actions.<br>
+│   └── user.js               # Routes for user actions.<br>
 │
-├── model/                    # Contains Mongoose schemas and models.
-│   ├── admin.js              # Schema/model for admin.
-│   ├── application.js        # Schema/model for applications.
-│   ├── contract.js           # Schema/model for contracts.
-│   ├── contractor.js         # Schema/model for contractors.
-│   ├── contractorReview.js   # Schema/model for contractor reviews.
-│   ├── product.js            # Schema/model for products.
-│   ├── productReview.js      # Schema/model for product reviews.
-│   ├── seller.js             # Schema/model for sellers.
-│   ├── user.js               # Schema/model for users.
-│   └── workStatus.js         # Schema/model for work status tracking.
-│
-├── node_modules/             # NPM packages (auto-generated).
-│
-├── public/                   # Static assets (CSS, client-side JS, images, etc.).
-│   └── ...                   # Further organized as needed.
-│
-├── routes/                   # Express routes mapping URLs to controllers.
-│   ├── admin.js              # Routes for admin actions.
-│   ├── contract.js           # Routes for contract actions.
-│   ├── contractor.js         # Routes for contractor actions.
-│   ├── product.js            # Routes for product actions.
-│   ├── seller.js             # Routes for seller actions.
-│   └── user.js               # Routes for user actions.
-│
-├── views/                    # EJS template files for rendering HTML.
-│   ├── adminPage/            # Views for the admin dashboard.
-│   ├── contractorPage/       # Views for the contractor dashboard.
-│   ├── layouts/              # Shared layout templates (header, footer, etc.).
-│   ├── login-signup/         # Templates for login and sign-up pages.
-│   ├── sellerPage/           # Views for the seller dashboard.
-│   ├── analyzer.ejs          # Specific EJS template (example).
-│   ├── applicationStatus.ejs # Template to show application status.
-│   ├── chat.ejs              # Chat/messaging interface template.
-│   ├── CommodityPrice.ejs    # Template for displaying commodity prices.
-│   ├── contract.ejs          # Template for contract details.
-│   ├── contractor_search.ejs # Template for searching contractors.
-│   ├── contractsNearby.ejs   # Template to show nearby contracts.
-│   ├── edit.ejs              # Template for editing information.
-│   ├── index2.ejs            # Additional homepage template.
-│   ├── messages.ejs          # Template for messaging interface.
-│   ├── profile.ejs           # User profile template.
-│   ├── requests.ejs          # Template for work requests.
-│   ├── searchResults.ejs     # Template to display search results.
-│   └── index.ejs             # Main homepage template.
-│
-├── .env                      # Environment variables file (not tracked in git).
-│
-├── authMiddleware.js         # Custom middleware for authentication and route protection.
-│
-├── cloudConfig.js            # Configuration for cloud services (e.g., Cloudinary).
-│
-└── index.js                  # Main entry point: sets up Express, connects to MongoDB, and starts the server.
+├── views/                    # EJS template files for rendering HTML.<br>
+│   ├── adminPage/            # Views for the admin dashboard.<br>
+│   ├── contractorPage/       # Views for the contractor dashboard.<br>
+│   ├── layouts/              # Shared layout templates (header, footer, etc.).<br>
+│   ├── login-signup/         # Templates for login and sign-up pages.<br>
+│   ├── sellerPage/           # Views for the seller dashboard.<br>
+│   ├── analyzer.ejs          # Specific EJS template (example).<br>
+│   ├── applicationStatus.ejs # Template to show application status.<br>
+│   ├── chat.ejs              # Chat/messaging interface template.<br>
+│   ├── CommodityPrice.ejs    # Template for displaying commodity prices.<br>
+│   ├── contract.ejs          # Template for contract details.<br>
+│   ├── contractor_search.ejs # Template for searching contractors.<br>
+│   ├── contractsNearby.ejs   # Template to show nearby contracts.<br>
+│   ├── edit.ejs              # Template for editing information.<br>
+│   ├── index2.ejs            # Additional homepage template.<br>
+│   ├── messages.ejs          # Template for messaging interface.<br>
+│   ├── profile.ejs           # User profile template.<br>
+│   ├── requests.ejs          # Template for work requests.<br>
+│   ├── searchResults.ejs     # Template to display search results.<br>
+│   └── index.ejs             # Main homepage template.<br>
+│<br>
+├── .env                      # Environment variables file (not tracked in git).<br>
+│<br>
+├── authMiddleware.js         # Custom middleware for authentication and route protection.<br>
+│<br>
+├── cloudConfig.js            # Configuration for cloud services (e.g., Cloudinary).<br>
+│<br>
+└── index.js                  # Main entry point: sets up Express, connects to MongoDB, and starts the server.<br>
+<br>
 
 
 
@@ -237,19 +238,19 @@ AgroGuide/
    cd AgroGuide
 
 ### Install Dependencies:
-npm install
-Set Up Environment Variables:
+npm install<br>
+Set Up Environment Variables: <br>
 
 Create a .env file in the root directory (this file is not included in the repository). Refer to the Environment Variables section below.
 
 ### Run the Application:
-node index.js
-The application will start on the defined port (default is 8080).
+node index.js<br>
+The application will start on the defined port (default is 8080).<br>
 
-Environment Variables
+Environment Variables<br>
 This project uses a .env file to store sensitive information, including database credentials and API keys. For security reasons, the actual keys are not included in the repository. You must create your own .env file with your credentials.
 
-Example .env file:
+Example .env file:<br>
 
 <mark> MongoDB connection string </mark>
 MONGO_URI=mongodb+srv://<username>:<password>@cluster0.r9vmv.mongodb.net/<your_db_name>?retryWrites=true&w=majority
@@ -260,12 +261,12 @@ SECRET="your_application_secret"
 <mark> Application port </mark>
 PORT=8080
 
-<mark> Cloudinary configuration (or other cloud service) </mark>
+<mark> Cloudinary configuration (or other cloud service) </mark><br>
 CLOUD_NAME=your_cloud_name
 CLOUD_API_KEY=your_cloud_api_key
 CLOUD_API_SECRET=your_cloud_api_secret
 
-<mark> API keys </mark>
+<mark> API keys </mark><br>
 PRICE_API_KEY=your_price_api_key
 WEATHER_API_KEY=your_weather_api_key
 Note: Replace the placeholders (e.g., <username>, <password>, <your_db_name>, etc.) with your actual credentials. Never commit your .env file to version control.
