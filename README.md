@@ -58,6 +58,7 @@ AgroGuide is built for four main types of users:
 - **Real-Time Data:** Integration with weather, market, and map APIs to provide live information.
 - **Market Insights:** Access real-time government mandi prices for agricultural products.
 - **Nearby Contractors:** Map integration to show contractors within a 10km radius.
+- **Flexible Work Opportunities:** Allows users to get work when they are free and at their desired locations.
 - **Request & Messaging System:** Enables direct communication and work request tracking.
 - **Modular Dashboard:** Tailored dashboards for contractors, sellers, and admin for easy management.
 - **RESTful Architecture:** Organized structure using routes, controllers, and models for scalability.
@@ -128,8 +129,6 @@ AgroGuide is built for four main types of users:
 ---
 
 ## Project Structure
-
-The project follows a modular MVC architecture. Here’s an overview of the structure:
 
 AgroGuide/
 ├── controllers/                # Contains business logic for handling requests. <br>
