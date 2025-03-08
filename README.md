@@ -13,7 +13,6 @@ AgroGuide is a full-stack web application that connects the agricultural communi
 - [APIs and Integrations](#apis-and-integrations)
 - [Project Structure](#project-structure)
 - [Installation and Setup](#installation-and-setup)
-- [Environment Variables](#environment-variables)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [Contact](#contact)
@@ -133,7 +132,7 @@ AgroGuide is built for four main types of users:
 The project follows a modular MVC architecture. Here’s an overview of the structure:
 
 AgroGuide/
-├── controllers/                # Contains business logic for handling requests.
+├── controllers/                # Contains business logic for handling requests. <br>
 │   ├── admin.js              # Controller for admin-related routes.
 │   ├── contract.js           # Controller for managing contracts.
 │   ├── contractor.js         # Controller for contractor-related routes.
