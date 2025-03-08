@@ -301,6 +301,6 @@ Please adhere to the existing code style and project structure.
 ## Contact
 For questions or further information, please contact:
 
-Nitin Singh
-Email: nitin0309singh@gmail.com
+Nitin Singh<br>
+Email: nitin0309singh@gmail.com<br>
 GitHub: Nitin-singh03
