@@ -132,61 +132,70 @@ AgroGuide is built for four main types of users:
 
 The project follows a modular MVC architecture. Here’s an overview of the structure:
 
-AgroGuide
-├── controllers
-│ ├── admin.js
-│ ├── contract.js
-│ ├── contractor.js
-│ ├── product.js
-│ ├── seller.js
-│ └── user.js
-├── model
-│ ├── admin.js
-│ ├── application.js
-│ ├── contract.js
-│ ├── contractor.js
-│ ├── contractorReview.js
-│ ├── product.js
-│ ├── productReview.js
-│ ├── seller.js
-│ ├── user.js
-│ └── workStatus.js
-├── node_modules
-├── public
-│ └── ... (CSS, client-side JS, images, etc.)
-├── routes
-│ ├── admin.js
-│ ├── contract.js
-│ ├── contractor.js
-│ ├── product.js
-│ ├── seller.js
-│ └── user.js
-├── views
-│ ├── adminPage
-│ │ └── ... (EJS files for admin pages)
-│ ├── contractorPage
-│ │ └── ... (EJS files for contractor pages)
-│ ├── layouts
-│ ├── login-signup
-│ ├── sellerPage
-│ ├── analyzer.ejs
-│ ├── applicationStatus.ejs
-│ ├── chat.ejs
-│ ├── CommodityPrice.ejs
-│ ├── contract.ejs
-│ ├── contractor_search.ejs
-│ ├── contractsNearby.ejs
-│ ├── edit.ejs
-│ ├── index2.ejs
-│ ├── messages.ejs
-│ ├── profile.ejs
-│ ├── requests.ejs
-│ ├── searchResults.ejs
-│ └── index.ejs
-├── .env // Not included in the repository
-├── authMiddleware.js
-├── cloudConfig.js
-└── index.js
+AgroGuide/
+├── controllers/                # Contains business logic for handling requests.
+│   ├── admin.js              # Controller for admin-related routes.
+│   ├── contract.js           # Controller for managing contracts.
+│   ├── contractor.js         # Controller for contractor-related routes.
+│   ├── product.js            # Controller for product listings.
+│   ├── seller.js             # Controller for seller-related routes.
+│   └── user.js               # Controller for user-related actions.
+│
+├── model/                    # Contains Mongoose schemas and models.
+│   ├── admin.js              # Schema/model for admin.
+│   ├── application.js        # Schema/model for applications.
+│   ├── contract.js           # Schema/model for contracts.
+│   ├── contractor.js         # Schema/model for contractors.
+│   ├── contractorReview.js   # Schema/model for contractor reviews.
+│   ├── product.js            # Schema/model for products.
+│   ├── productReview.js      # Schema/model for product reviews.
+│   ├── seller.js             # Schema/model for sellers.
+│   ├── user.js               # Schema/model for users.
+│   └── workStatus.js         # Schema/model for work status tracking.
+│
+├── node_modules/             # NPM packages (auto-generated).
+│
+├── public/                   # Static assets (CSS, client-side JS, images, etc.).
+│   └── ...                   # Further organized as needed.
+│
+├── routes/                   # Express routes mapping URLs to controllers.
+│   ├── admin.js              # Routes for admin actions.
+│   ├── contract.js           # Routes for contract actions.
+│   ├── contractor.js         # Routes for contractor actions.
+│   ├── product.js            # Routes for product actions.
+│   ├── seller.js             # Routes for seller actions.
+│   └── user.js               # Routes for user actions.
+│
+├── views/                    # EJS template files for rendering HTML.
+│   ├── adminPage/            # Views for the admin dashboard.
+│   ├── contractorPage/       # Views for the contractor dashboard.
+│   ├── layouts/              # Shared layout templates (header, footer, etc.).
+│   ├── login-signup/         # Templates for login and sign-up pages.
+│   ├── sellerPage/           # Views for the seller dashboard.
+│   ├── analyzer.ejs          # Specific EJS template (example).
+│   ├── applicationStatus.ejs # Template to show application status.
+│   ├── chat.ejs              # Chat/messaging interface template.
+│   ├── CommodityPrice.ejs    # Template for displaying commodity prices.
+│   ├── contract.ejs          # Template for contract details.
+│   ├── contractor_search.ejs # Template for searching contractors.
+│   ├── contractsNearby.ejs   # Template to show nearby contracts.
+│   ├── edit.ejs              # Template for editing information.
+│   ├── index2.ejs            # Additional homepage template.
+│   ├── messages.ejs          # Template for messaging interface.
+│   ├── profile.ejs           # User profile template.
+│   ├── requests.ejs          # Template for work requests.
+│   ├── searchResults.ejs     # Template to display search results.
+│   └── index.ejs             # Main homepage template.
+│
+├── .env                      # Environment variables file (not tracked in git).
+│
+├── authMiddleware.js         # Custom middleware for authentication and route protection.
+│
+├── cloudConfig.js            # Configuration for cloud services (e.g., Cloudinary).
+│
+└── index.js                  # Main entry point: sets up Express, connects to MongoDB, and starts the server.
+
+
 
 **Key Files & Directories:**
 
@@ -227,23 +236,14 @@ AgroGuide
    ```bash
    git clone https://github.com/yourusername/AgroGuide.git
    cd AgroGuide
-   ```
 
-Install Dependencies:
-
-bash
-Copy
-Edit
+### Install Dependencies:
 npm install
 Set Up Environment Variables:
 
 Create a .env file in the root directory (this file is not included in the repository). Refer to the Environment Variables section below.
 
-Run the Application:
-
-bash
-Copy
-Edit
+### Run the Application:
 node index.js
 The application will start on the defined port (default is 8080).
 
@@ -252,36 +252,26 @@ This project uses a .env file to store sensitive information, including database
 
 Example .env file:
 
-bash
-Copy
-Edit
-
-### MongoDB connection string
-
+<mark> MongoDB connection string </mark>
 MONGO_URI=mongodb+srv://<username>:<password>@cluster0.r9vmv.mongodb.net/<your_db_name>?retryWrites=true&w=majority
 
-### Application secret
-
+<mark> Application secret <mark>
 SECRET="your_application_secret"
 
-### Application port
-
+<mark> Application port </mark>
 PORT=8080
 
-### Cloudinary configuration (or other cloud service)
-
+<mark> Cloudinary configuration (or other cloud service) </mark>
 CLOUD_NAME=your_cloud_name
 CLOUD_API_KEY=your_cloud_api_key
 CLOUD_API_SECRET=your_cloud_api_secret
 
-### API keys
-
+<mark> API keys </mark>
 PRICE_API_KEY=your_price_api_key
 WEATHER_API_KEY=your_weather_api_key
 Note: Replace the placeholders (e.g., <username>, <password>, <your_db_name>, etc.) with your actual credentials. Never commit your .env file to version control.
 
 ## Usage
-
 User Interface:
 Users can view product listings, check live weather data, and search for mandi prices and nearby contractors.
 Contractors can manage work listings, review incoming requests, and communicate with users.
@@ -290,35 +280,25 @@ Admins have full oversight to manage all users and listings.
 Dashboard & Communication:
 Each user role has a dedicated dashboard.
 The integrated messaging system allows for real-time communication and dispute resolution.
-Contributing
+
+## Contributing
 Contributions are welcome! Follow these steps to contribute:
 
 Fork the Repository.
 
 Create a New Branch:
-
-bash
-Copy
-Edit
 git checkout -b feature/YourFeature
-Commit Your Changes:
 
-bash
-Copy
-Edit
+Commit Your Changes:
 git commit -m "Add some feature"
 Push to Your Branch:
 
-bash
-Copy
-Edit
 git push origin feature/YourFeature
 Open a Pull Request describing your changes.
 
 Please adhere to the existing code style and project structure.
 
 ## Contact
-
 For questions or further information, please contact:
 
 Nitin Singh
