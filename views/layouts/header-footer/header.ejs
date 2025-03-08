@@ -1,0 +1,180 @@
+<style>
+  .search-btn {
+    background-color: #3a8915;
+    color: #fff;
+    border-radius: 25px;
+    padding: 0 1rem 0 1rem;
+  }
+
+  .search-btn:hover {
+    background-color: #3a8915;
+    color: #fff;
+  }
+
+  .search-btn i {
+    display: inline;
+    margin-right: 0.5rem;
+  }
+
+  .search-inp {
+    border-radius: 25px;
+    padding: 0.5rem 3rem;
+  }
+
+  /* Styling the container */
+  .toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .toggle-btn {
+    width: 60px;
+    height: 30px;
+    border-radius: 50px;
+    background-color: #ccc;
+    position: relative;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .toggle-icon {
+    width: 26px;
+    height: 26px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s;
+  }
+
+  .toggle-btn.active {
+    background-color: #3a8915;
+  }
+
+  .toggle-btn.active .toggle-icon {
+    transform: translateX(30px);
+  }
+
+  /* Text styling */
+  .toggle-text {
+    margin-left: 10px;
+    font-weight: bold;
+    color: #000000A6;
+  }
+</style>
+
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <div class="logo_item">
+      <i class="bx bx-menu" id="sidebarOpen"></i>
+      <a href="javascript:history.back()">
+        <img src="https://res.cloudinary.com/datlajath/image/upload/v1729872176/AgroGuide/p5f3ij1zqjipsifdj0mt.png"
+          alt="Logo">
+      </a>
+      <a href="javascript:history.back()">AgroGuide</a>
+    </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <% if (currUser) { %>
+        <div class="toggle-container navbar-nav ms-auto">
+          <form id="workToggleForm" action="/toggle-work" method="POST" style="display: flex; justify-content: center; align-items: center;">
+            <input type="hidden" name="userId" value="<%= currUser ? currUser : '' %>">
+            <input type="hidden" name="latitude" id="latitude" value="">
+            <input type="hidden" name="longitude" id="longitude" value="">
+            <input type="hidden" name="status" id="status" value="<%= isLookingForWork ? 1 : 0 %>">
+
+            <button type="submit" class="toggle-btn <%= isLookingForWork ? 'active' : '' %>" id="toggleBtn">
+              <span class="toggle-icon"></span>
+            </button>
+            <span class="toggle-text" id="toggleText">
+              <%= isLookingForWork ? 'Looking for Work' : 'Not Looking for Work' %>
+            </span>
+          </form>
+        </div>
+        <% } %>
+
+          <div class="navbar-nav ms-auto">
+            <form action="/search" method="get" class="d-flex" role="search">
+              <input class="form-control me-2 search-inp" type="search" name="query" placeholder="Search"
+                aria-label="Search">
+              <button class="btn search-btn" type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i> Search
+              </button>
+            </form>
+          </div>
+
+          <div id="google_translate_element" class="nav-link"></div>
+
+          <div class="navbar-nav ms-auto">
+            <% if (currUser) { %>
+          
+              <a class="nav-link" href="/messages/<%=currUser%>"><b>Messages</b></a>
+              <a class="nav-link" href="/edit"><b>Edit Profile</b></a>
+              <a class="nav-link" href="/logout"><b>Log out</b></a>
+              <% } else if (sellerId) { %>
+                <a class="nav-link" href="/seller/dashboard"><b>Seller Dashboard</b></a>
+                <a class="nav-link" href="/logout"><b>Log out</b></a>
+                <% } else if (contractorId) { %>
+                  <a class="nav-link" href="/contractor/dashboard"><b>Contractor Dashboard</b></a>
+                  <a class="nav-link" href="/logout"><b>Log out</b></a>
+                  <% } else { %>
+                    <a class="nav-link" href="/signup"><b>Sign up</b></a>
+                    <a class="nav-link" href="/login-main"><b>Log in</b></a>
+                    <% } %>
+          </div>
+
+    </div>
+  </div>
+</nav>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggleBtn = document.getElementById('toggleBtn');
+    const toggleText = document.getElementById('toggleText');
+    const statusInput = document.getElementById('status');
+    const latitudeInput = document.getElementById('latitude');
+    const longitudeInput = document.getElementById('longitude');
+    const form = document.getElementById('workToggleForm');
+
+    if (!toggleBtn || !toggleText || !statusInput || !form) return;
+
+    toggleBtn.addEventListener('click', (event) => {
+      event.preventDefault(); // Prevent immediate form submission
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          latitudeInput.value = position.coords.latitude;
+          longitudeInput.value = position.coords.longitude;
+
+          toggleBtn.classList.toggle('active');
+          const isActive = toggleBtn.classList.contains('active');
+          statusInput.value = isActive ? 1 : 0;
+          toggleText.textContent = isActive ? 'Looking for Work' : 'Not Looking for Work';
+
+          form.submit();
+        }, () => {
+          alert("Location access denied. Cannot enable work mode.");
+        });
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en', // Default language of the page
+      includedLanguages: 'en,hi,bn,kn,ks,ml,ne,pa,sa,ta,te,', // Add languages you want to include (ISO 639-1 codes)
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+</script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

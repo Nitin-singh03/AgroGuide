@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= contract.terms %> - Contract Details
+    </title>
+    <link rel="stylesheet" href="/Pstyle.css">
+    <link rel="icon"
+        href="https://res.cloudinary.com/datlajath/image/upload/v1729872176/AgroGuide/p5f3ij1zqjipsifdj0mt.png">
+    <style>
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 40%;
+            position: relative;
+            text-align: center;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="product-container">
+        <div class="product-image">
+            <img src="<%= contract.owner.image %>" alt="Product Image">
+        </div>
+        <div class="product-details">
+            <h1>
+                <%= contract.constructor_name %>
+            </h1>
+            <p><strong>Rate:</strong>
+                <%= contract.rent %>
+                    <%= contract.rent_type %>
+            </p>
+            <p><strong>Area:</strong>
+                <%= contract.area %>
+            </p>
+            <p><strong>Description:</strong>
+                <%= contract.terms %>
+            </p>
+
+            <h2>Seller Information</h2>
+            <p><strong>Seller Name:</strong>
+                <%= contract.owner.username %>
+            </p>
+            <p><strong>Mobile:</strong>
+                <%= contract.owner.Pnumber %>
+            </p>
+            <p><strong>Email:</strong>
+                <%= contract.owner.email %>
+            </p>
+            <p><strong>District:</strong>
+                <%= contract.owner.district %>
+            </p>
+
+            <div class="button-container">
+                <a href="mailto:<%= contract.owner.email %>" class="button mail">Mail</a>
+                <a class="button mail" href="/contractor/chat/<%= contract.owner._id %>">Message</a>
+                <button class="button mail apply-btn">Apply</button>
+            </div>
+
+            <div class="button-container">
+                <button class="button mail review-btn">Add Review</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Apply Modal -->
+    <div id="apply-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Apply for Contract</h3>
+            <form action="/apply/<%= contract._id %>" method="POST">
+                <label for="message">Your Conditions:</label>
+                <textarea name="message" required></textarea>
+                <button type="submit" class="button submit-apply" style="background-color: rgb(129, 87, 168);">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="review-container">
+        <div id="review-form-container" class="review-form" style="display: none;">
+            <h3>Write a Review</h3>
+            <form id="review-form" action="/contract/<%= contract._id %>/review" method="POST">
+                <label for="rating">Rating:</label>
+                <div class="star-rating">
+                    <input type="radio" name="rating" value="5" id="star5"><label for="star5">&#9733;</label>
+                    <input type="radio" name="rating" value="4" id="star4"><label for="star4">&#9733;</label>
+                    <input type="radio" name="rating" value="3" id="star3"><label for="star3">&#9733;</label>
+                    <input type="radio" name="rating" value="2" id="star2"><label for="star2">&#9733;</label>
+                    <input type="radio" name="rating" value="1" id="star1" required><label for="star1">&#9733;</label>
+                </div>
+                <label for="comment">Comment:</label>
+                <textarea name="comment" required></textarea>
+                <button type="submit" class="button submit-review">Submit</button>
+            </form>
+        </div>
+        <div class="reviews-section">
+            <h3 class="reviews-title">Customer Reviews</h3>
+            <% if (reviews.length> 0) { %>
+                <div class="review-list">
+                    <% reviews.forEach(review=> { %>
+                        <div class="review-card">
+                            <p class="review-user">
+                                <strong>
+                                    <%= review.user.username %>
+                                </strong>
+                                - <%= review.createdAt.toDateString() %>
+                            </p>
+                            <p class="review-rating">⭐ <%= review.rating %>/5</p>
+                            <p class="review-comment">
+                                <%= review.comment %>
+                            </p>
+                        </div>
+                        <% }); %>
+                </div>
+                <% } else { %>
+                    <p class="no-reviews">No reviews yet. Be the first to review this contract!</p>
+                    <% } %>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const reviewBtn = document.querySelector(".review-btn");
+            const reviewForm = document.getElementById("review-form-container");
+            const stars = document.querySelectorAll(".star-rating label");
+            const starInputs = document.querySelectorAll(".star-rating input");
+
+            if (reviewBtn) {
+                reviewBtn.addEventListener("click", function () {
+                    reviewForm.style.display = "block";
+                });
+            }
+
+            stars.forEach(star => {
+                star.addEventListener("mouseover", function () {
+                    highlightStars(this.previousElementSibling ? this.previousElementSibling.value : 0);
+                });
+                star.addEventListener("mouseout", resetStars);
+                star.addEventListener("click", function () {
+                    this.previousElementSibling.checked = true;
+                    highlightStars(this.previousElementSibling.value);
+                });
+            });
+
+            function highlightStars(value) {
+                stars.forEach(label => {
+                    label.style.color = label.previousElementSibling.value <= value ? "gold" : "#ccc";
+                });
+            }
+
+            function resetStars() {
+                let checkedStar = [...starInputs].find(input => input.checked);
+                highlightStars(checkedStar ? checkedStar.value : 0);
+            }
+
+            // Apply Form Modal
+            const applyBtn = document.querySelector(".apply-btn");
+            const modal = document.getElementById("apply-modal");
+            const closeModal = document.querySelector(".close");
+
+            applyBtn.addEventListener("click", function () {
+                modal.style.display = "flex";
+            });
+
+            closeModal.addEventListener("click", function () {
+                modal.style.display = "none";
+            });
+
+            window.addEventListener("click", function (event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

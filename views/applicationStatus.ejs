@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Status</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+
+        .application-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Application Status</h1>
+    <% if (applications && applications.length> 0) { %>
+        <% applications.forEach(function(app) { %>
+            <div class="application-card">
+                <p>
+                    <strong>Contractor:</strong>
+                    <span>
+                        <%= app.contractorId ? app.contractorId.username : "N/A" %>
+                    </span>
+                </p>
+                <p><strong>Message:</strong>
+                    <%= app.message %>
+                </p>
+                <p><strong>Status:</strong>
+                    <%= app.status %>
+                </p>
+                <p><strong>Applied At:</strong>
+                    <%= app.appliedAt %>
+                </p>
+                <% if (app.contractId && app.contractId.title) { %>
+                    <p><strong>Contract Title:</strong>
+                        <%= app.contractId.title %>
+                    </p>
+                    <% } %>
+            </div>
+            <% }); %>
+                <% } else { %>
+                    <p>No applications found.</p>
+                    <% } %>
+</body>
+
+</html>
