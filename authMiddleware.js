@@ -8,11 +8,11 @@ const isAuthenticated = (req, res, next) => {
 
 
 const isAuthorized = (req, res, next) => {
-    const userId = req.user._id.toString(); // Logged-in user
-    const targetUserId = req.params.userId; // User being accessed
+    const userId = req.user._id.toString(); 
+    const targetUserId = req.params.userId;
 
     if (userId === targetUserId) {
-        return next(); // If the user is accessing their own data, allow it
+        return next();
     }
 
     req.flash("error", "You are not authorized to perform this action.");
@@ -21,11 +21,10 @@ const isAuthorized = (req, res, next) => {
 
 const isAdmin = (req, res, next) => {
     if (req.user && req.user.role === "admin") {
-        return next(); // Proceed if user is an admin
+        return next(); 
     }
     req.flash("error", "Admin access only.");
     res.redirect("/");
 };
 
-// Export Middleware Functions
 module.exports = { isAuthenticated, isAuthorized, isAdmin };

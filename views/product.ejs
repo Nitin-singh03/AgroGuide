@@ -63,7 +63,6 @@
                         <a href="mailto:<%= product.owner.email %>" class="button mail">Mail</a>
                     </div>
 
-                    <!-- Review Button -->
                     <div class="button-container">
                         <button class="button mail review-btn">Add Review</button>
                     </div>
@@ -119,7 +118,7 @@
                 .review-list {
                     display: grid;
                     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                    gap: 15px; /* Space between review cards */
+                    gap: 15px;
                 }
         
                 .review-card {
@@ -190,7 +189,6 @@
                 });
             }
 
-            // Hover & Click Effect for Stars
             stars.forEach(star => {
                 star.addEventListener("mouseover", function () {
                     highlightStars(this.previousElementSibling ? this.previousElementSibling.value : 0);

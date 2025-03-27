@@ -130,71 +130,69 @@ AgroGuide is built for four main types of users:
 
 ## Project Structure
 
-AgroGuide/
-├── controllers/                # Contains business logic for handling requests. <br>
-│   ├── admin.js              # Controller for admin-related routes.<br>
-│   ├── contract.js           # Controller for managing contracts.<br>
-│   ├── contractor.js         # Controller for contractor-related routes.<br>
-│   ├── product.js            # Controller for product listings.<br>
-│   ├── seller.js             # Controller for seller-related routes.<br>
-│   └── user.js               # Controller for user-related actions.<br>
-│  <br>
-├── model/                    # Contains Mongoose schemas and models.<br>
-│   ├── admin.js              # Schema/model for admin.<br>
-│   ├── application.js        # Schema/model for applications.<br>
-│   ├── contract.js           # Schema/model for contracts.<br>
-│   ├── contractor.js         # Schema/model for contractors.<br>
-│   ├── contractorReview.js   # Schema/model for contractor reviews.<br>
-│   ├── product.js            # Schema/model for products.<br>
-│   ├── productReview.js      # Schema/model for product reviews.<br>
-│   ├── seller.js             # Schema/model for sellers.<br>
-│   ├── user.js               # Schema/model for users.<br>
-│   └── workStatus.js         # Schema/model for work status tracking.<br>
+AgroGuide/<br>
+├── controllers/ # Contains business logic for handling requests. <br>
+│ ├── admin.js # Controller for admin-related routes.<br>
+│ ├── contract.js # Controller for managing contracts.<br>
+│ ├── contractor.js # Controller for contractor-related routes.<br>
+│ ├── product.js # Controller for product listings.<br>
+│ ├── seller.js # Controller for seller-related routes.<br>
+│ └── user.js # Controller for user-related actions.<br>
+│ <br>
+├── model/ # Contains Mongoose schemas and models.<br>
+│ ├── admin.js # Schema/model for admin.<br>
+│ ├── application.js # Schema/model for applications.<br>
+│ ├── contract.js # Schema/model for contracts.<br>
+│ ├── contractor.js # Schema/model for contractors.<br>
+│ ├── contractorReview.js # Schema/model for contractor reviews.<br>
+│ ├── product.js # Schema/model for products.<br>
+│ ├── productReview.js # Schema/model for product reviews.<br>
+│ ├── seller.js # Schema/model for sellers.<br>
+│ ├── user.js # Schema/model for users.<br>
+│ └── workStatus.js # Schema/model for work status tracking.<br>
 │<br>
-├── node_modules/             # NPM packages (auto-generated).<br>
+├── node_modules/ # NPM packages (auto-generated).<br>
 │<br>
-├── public/                   # Static assets (CSS, client-side JS, images, etc.).<br>
-│   └── ...                   # Further organized as needed.<br>
+├── public/ # Static assets (CSS, client-side JS, images, etc.).<br>
+│ └── ... # Further organized as needed.<br>
 │<br>
-├── routes/                   # Express routes mapping URLs to controllers.<br>
-│   ├── admin.js              # Routes for admin actions.<br>
-│   ├── contract.js           # Routes for contract actions.<br>
-│   ├── contractor.js         # Routes for contractor actions.<br>
-│   ├── product.js            # Routes for product actions.<br>
-│   ├── seller.js             # Routes for seller actions.<br>
-│   └── user.js               # Routes for user actions.<br>
+├── routes/ # Express routes mapping URLs to controllers.<br>
+│ ├── admin.js # Routes for admin actions.<br>
+│ ├── contract.js # Routes for contract actions.<br>
+│ ├── contractor.js # Routes for contractor actions.<br>
+│ ├── product.js # Routes for product actions.<br>
+│ ├── seller.js # Routes for seller actions.<br>
+│ └── user.js # Routes for user actions.<br>
 │
-├── views/                    # EJS template files for rendering HTML.<br>
-│   ├── adminPage/            # Views for the admin dashboard.<br>
-│   ├── contractorPage/       # Views for the contractor dashboard.<br>
-│   ├── layouts/              # Shared layout templates (header, footer, etc.).<br>
-│   ├── login-signup/         # Templates for login and sign-up pages.<br>
-│   ├── sellerPage/           # Views for the seller dashboard.<br>
-│   ├── analyzer.ejs          # Specific EJS template (example).<br>
-│   ├── applicationStatus.ejs # Template to show application status.<br>
-│   ├── chat.ejs              # Chat/messaging interface template.<br>
-│   ├── CommodityPrice.ejs    # Template for displaying commodity prices.<br>
-│   ├── contract.ejs          # Template for contract details.<br>
-│   ├── contractor_search.ejs # Template for searching contractors.<br>
-│   ├── contractsNearby.ejs   # Template to show nearby contracts.<br>
-│   ├── edit.ejs              # Template for editing information.<br>
-│   ├── index2.ejs            # Additional homepage template.<br>
-│   ├── messages.ejs          # Template for messaging interface.<br>
-│   ├── profile.ejs           # User profile template.<br>
-│   ├── requests.ejs          # Template for work requests.<br>
-│   ├── searchResults.ejs     # Template to display search results.<br>
-│   └── index.ejs             # Main homepage template.<br>
+├── views/ # EJS template files for rendering HTML.<br>
+│ ├── adminPage/ # Views for the admin dashboard.<br>
+│ ├── contractorPage/ # Views for the contractor dashboard.<br>
+│ ├── layouts/ # Shared layout templates (header, footer, etc.).<br>
+│ ├── login-signup/ # Templates for login and sign-up pages.<br>
+│ ├── sellerPage/ # Views for the seller dashboard.<br>
+│ ├── analyzer.ejs # Specific EJS template (example).<br>
+│ ├── applicationStatus.ejs # Template to show application status.<br>
+│ ├── chat.ejs # Chat/messaging interface template.<br>
+│ ├── CommodityPrice.ejs # Template for displaying commodity prices.<br>
+│ ├── contract.ejs # Template for contract details.<br>
+│ ├── contractor_search.ejs # Template for searching contractors.<br>
+│ ├── contractsNearby.ejs # Template to show nearby contracts.<br>
+│ ├── edit.ejs # Template for editing information.<br>
+│ ├── index2.ejs # Additional homepage template.<br>
+│ ├── messages.ejs # Template for messaging interface.<br>
+│ ├── profile.ejs # User profile template.<br>
+│ ├── requests.ejs # Template for work requests.<br>
+│ ├── searchResults.ejs # Template to display search results.<br>
+│ └── index.ejs # Main homepage template.<br>
 │<br>
-├── .env                      # Environment variables file (not tracked in git).<br>
+├── .env # Environment variables file (not tracked in git).<br>
 │<br>
-├── authMiddleware.js         # Custom middleware for authentication and route protection.<br>
+├── authMiddleware.js # Custom middleware for authentication and route protection.<br>
 │<br>
-├── cloudConfig.js            # Configuration for cloud services (e.g., Cloudinary).<br>
+├── cloudConfig.js # Configuration for cloud services (e.g., Cloudinary).<br>
 │<br>
-└── index.js                  # Main entry point: sets up Express, connects to MongoDB, and starts the server.<br>
+└── index.js # Main entry point: sets up Express, connects to MongoDB, and starts the server.<br>
 <br>
-
-
 
 **Key Files & Directories:**
 
@@ -235,14 +233,17 @@ AgroGuide/
    ```bash
    git clone https://github.com/Nitin-singh03/AgroGuide.git
    cd AgroGuide
+   ```
 
 ### Install Dependencies:
+
 npm install<br>
 Set Up Environment Variables: <br>
 
 Create a .env file in the root directory (this file is not included in the repository). Refer to the Environment Variables section below.
 
 ### Run the Application:
+
 node index.js<br>
 The application will start on the defined port (default is 8080).<br>
 
@@ -271,6 +272,7 @@ WEATHER_API_KEY=your_weather_api_key
 Note: Replace the placeholders (e.g., <username>, <password>, <your_db_name>, etc.) with your actual credentials. Never commit your .env file to version control.
 
 ## Usage
+
 User Interface:
 Users can view product listings, check live weather data, and search for mandi prices and nearby contractors.
 Contractors can manage work listings, review incoming requests, and communicate with users.
@@ -281,6 +283,7 @@ Each user role has a dedicated dashboard.
 The integrated messaging system allows for real-time communication and dispute resolution.
 
 ## Contributing
+
 Contributions are welcome! Follow these steps to contribute:
 
 Fork the Repository.
@@ -298,6 +301,7 @@ Open a Pull Request describing your changes.
 Please adhere to the existing code style and project structure.
 
 ## Contact
+
 For questions or further information, please contact:
 
 Nitin Singh<br>

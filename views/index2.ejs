@@ -17,7 +17,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: block;
-  max-width: 100%; /* Adjust as needed */
+  max-width: 100%; 
 }
 
   </style>
@@ -171,28 +171,23 @@
     </div>
     
     <script>
-      // JavaScript for auto-rotating images
       document.addEventListener('DOMContentLoaded', function () {
         const slides = document.querySelectorAll('.slider img');
         let currentIndex = 0;
 
         function showNextSlide() {
-          // Hide all slides
           slides.forEach((slide) => {
             slide.style.display = 'none';
           });
 
-          // Show the next slide
           currentIndex = (currentIndex + 1) % slides.length;
           slides[currentIndex].style.display = 'block';
         }
 
-        // Initialize the slider
         slides.forEach((slide, index) => {
           slide.style.display = index === 0 ? 'block' : 'none';
         });
 
-        // Set interval for auto-rotation (e.g., every 3 seconds)
         setInterval(showNextSlide, 3000);
       });
     </script>

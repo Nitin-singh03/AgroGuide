@@ -63,8 +63,8 @@ const http = require('http');
 const socketIo = require('socket.io');
 const Chat = require('./model/contractorUserChat.js');
 
-const server = http.createServer(app); // Create HTTP server
-const io = socketIo(server);  // Attach Socket.IO
+const server = http.createServer(app); 
+const io = socketIo(server);  
 
 io.on('connection', (socket) => {
     console.log('A user connected:', socket.id);
