@@ -2,8 +2,8 @@
 
 AgroGuide is a full-stack web application that connects the agricultural community—farmers, laborers, contractors, sellers, and administrators—using modern web technologies and multiple APIs. It provides real-time market insights, work listings, and communication tools to help users make informed decisions in agriculture.
 
-### [text](https://agroguide-6elk.onrender.com)
-
+### [deployed link](https://agroguide-6elk.onrender.com)
+Check in laptop working for app version
 ---
 
 ## Table of Contents
