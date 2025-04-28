@@ -1,7 +1,6 @@
 
 const Product = require('../model/product');
 const ReviewProduct = require('../model/productReview.js');
-const User = require("../model/user.js");
 
 exports.createProduct = async (req, res) => {
     try {

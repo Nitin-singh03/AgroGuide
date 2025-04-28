@@ -3,6 +3,7 @@ const Contract = require('../model/contract');
 const Chat = require('../model/contractorUserChat');
 const User = require("../model/user");
 const Application = require('../model/application');
+const WorkStatus = require('../model/workStatus.js');
 
 exports.renderApplyPage = (req, res) => {
     res.render("login-signup/applyContr.ejs"); 
@@ -57,8 +58,14 @@ exports.applyForContractor = async (req, res) => {
 
 
 
-exports.checkContractorStatusPage = (req, res) => {
-    res.render("contractorPage/status.ejs");
+exports.checkContractorStatusPage = async (req, res) => {
+    let isLookingForWork = false;
+
+    if (req.user) {
+        const workStatus = await WorkStatus.findOne({ userId: req.user._id });
+        isLookingForWork = !!workStatus;
+    }
+    res.render("contractorPage/status.ejs", {isLookingForWork});
 };
 
 exports.checkContractorStatus = async (req, res) => {

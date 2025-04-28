@@ -1,5 +1,6 @@
 const Seller = require('../model/seller');
 const Product = require('../model/product');
+const WorkStatus = require('../model/workStatus.js');
 
 exports.applyForSeller = async (req, res) => {
     const { Pnumber, username, email, aadhar, district, companyName, password } = req.body;
@@ -39,8 +40,14 @@ exports.renderApplyPage = (req, res) => {
     res.render("login-signup/applySeller.ejs");
 };
 
-exports.checkSellerStatusPage = (req, res) => {
-    res.render("sellerPage/status.ejs");
+exports.checkSellerStatusPage = async (req, res) => {
+    let isLookingForWork = false;
+
+    if (req.user) {
+        const workStatus = await WorkStatus.findOne({ userId: req.user._id });
+        isLookingForWork = !!workStatus;
+    }
+    res.render("sellerPage/status.ejs", {isLookingForWork});
 };
 
 exports.checkSellerStatus = async (req, res) => {
